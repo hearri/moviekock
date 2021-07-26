@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.movie.dao.AdminDao">
+	
+	
+	<select id="userTotalCount" resultType="int">
+		select count(*)
+		from users
+		where user_nickname not in('ADMIN')
+	</select>
+	
+	<select id="userDtoList" parameterType="map" resultType="com.koreait.movie.dto.UserDto">
+		
+		select e.*
+		from (
+            select rownum as rn , f.*, d.genre
+            from users f ,
+			(select a.user_no, LISTAGG(c.genre_name, ',') within group (order by c.genre_name) as genre
+			from users a, movie_taste b, genre c
+            where a.user_no = b.user_no
+            and b.genre_no = c.genre_no
+			and a.user_nickname not in('ADMIN')
+            group by a.user_no
+			order by a.user_no desc) d
+            where f.user_no = d.user_no) e
+		where e.rn between #{beginRecord} and #{endRecord}
+		
+	</select>
+	
+	<delete id="userDelete">
+		delete
+		from users
+		where user_no = #{param1}
+	</delete>
+	
+	
+	<select id="movieDtoList" parameterType="map" resultType="com.koreait.movie.dto.MovieDto">
+	
+		select c.*
+		from (
+			select rownum as rn, b.*
+			from (
+				select a.movie_no, a.movie_title, a.movie_director,
+					 a.movie_audience, a.movie_opening_date, a.movie_nation,
+					  a.movie_story, a.movie_web_score, LISTAGG(c.genre_name, ',') within group (order by c.genre_name) as genre_name
+				from movie a, movie_genre b, genre c 
+				where a.movie_no = b.movie_no
+				and b.genre_no = c.genre_no
+				group by a.movie_no, a.movie_title,
+					 a.movie_director, a.movie_audience,
+					 a.movie_opening_date, a.movie_nation,
+					 a.movie_story, a.movie_web_score
+				order by a.movie_no desc) b) c
+		where rn between #{beginRecord} and #{endRecord}
+	</select>
+	
+	<select id="movieTotalCount" resultType="int">
+		select count(*)
+		from movie
+	</select>
+	
+	
+	<select id="userNickname" parameterType="int" resultType="string"> 
+		SELECT USER_NICKNAME 
+		FROM USERS 
+		WHERE USER_NO = #{user_no} 
+	</select> 
+	
+	
+	<select id="qnaDtoList" resultType="com.koreait.movie.dto.QnaDto">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		          FROM (SELECT Q.*, U.USER_NICKNAME
+		                  FROM QNA Q, USERS U
+		                 WHERE Q.USER_NO = U.USER_NO
+		              ORDER BY QNA_NO DESC) A) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+	
+		
+	<select id="qnaTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM QNA
+	</select>
+	
+	
+	<delete id="adminQnaReplyDelete" parameterType="int">
+		DELETE
+		  FROM QNA_REPLY
+		 WHERE QNA_REPLY_NO = #{qna_reply_no}
+	</delete>
+	
+	
+	<delete id="adminQnaDelte" parameterType="int">
+		DELETE
+		  FROM QNA
+		 WHERE QNA_NO = #{qna_no}
+	</delete>
+	
+	
+	
+	
+	
+	
+</mapper>
+	

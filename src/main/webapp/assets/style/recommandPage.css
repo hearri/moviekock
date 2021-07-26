@@ -1,0 +1,146 @@
+@charset "UTF-8";
+body {
+	background: #141414;
+}
+     #wrap{
+            width: 1300px;
+            height: 1000px;
+            margin: auto;     
+        }
+ 
+        #main{
+        	width : 1300px;
+        	height: 900px;
+        	position :relative;
+        }
+        
+        .topmenu{
+			position: absolute;
+			left: 10px;
+			top : -5px;
+		}
+		
+		.display{
+		 	display : none;
+		}
+		
+		#random-frame{
+			position: absolute;
+			top : 150px;
+			left : 400px;
+		}
+		
+		#feel-frame{
+			position : absolute;
+			top : 200px;
+			left : 200px;
+		
+		}
+		
+	  #situ-frame{
+         	position : absolute;
+            top : 250px;
+			left : 100px;
+        }
+        
+        #tag-frame{
+        	text-align: center;
+        }
+        
+		#movie-box{
+			width : 500px;
+			height: 600px;
+			margin : auto;
+			position : relative;
+			top : 10px;
+			border : 2px solid black;
+		}
+        
+        #emoticon-frame{
+        	postion : absolute;
+        	right: 0px;
+            width: 950px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+       .situation-box{
+      		display : inline-block;
+        	padding : 0px 10px 0px 10px;
+            margin : 5px;
+            border: 5px solid gray;
+            border-radius: 30px;
+            height: 70px;
+            text-align: center;
+            line-height:60px;
+            font-weight: bold;
+            font-size: 25px;
+            color : gray;
+        }
+        
+        img{
+        	width : 100px;
+        	height : 100px;
+        	margin : 30px;
+        	margin-top: 25px;	
+        }
+       
+       input{
+       		border-radius: 10px;
+       		background-color: light-gray;
+       		border : 2px solid light-gray;
+       		height: 50px;
+			width : 130px;
+       		font-size: 20px;
+       		font-weight: bold;
+       		position : absolute;
+       		left : 550px;
+       		bottom : 40px;
+       
+       }
+  
+		button{
+			text-align: center;
+			font-weight: bold;
+			font-size: 20px;
+			background-color: white;
+			border : 2px solid gray;
+			height: 40px;
+			width : 130px;
+		}
+	
+		#b1{
+			border-radius: 10px 0px 0px 10px;
+			margin-right: -12px;
+	
+			}
+		#b2{
+			width:135px;
+		}
+		#b3{
+			border-radius: 0px 10px 10px 0px;
+			margin-left: -12px;
+		}
+
+		button:focus {
+  			background-color:gray;
+  			color:white;
+		}
+	
+		
+		.clicked{
+			color : navy;
+			border-color: navy;
+			
+		}
+		
+		input:hover{
+			background-color:gray;
+  			color:white;
+		}
+     
+		.situation-box:hover{
+			border:5px solid navy;
+  			color:navy;
+		}
+		

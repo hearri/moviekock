@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.koreait.movie.dao.MyDao">
+	
+	<select id="myWrite" parameterType="int" resultType="com.koreait.movie.dto.CommentDto">
+		SELECT movie_no, comments_title, comment_date
+		  FROM comments
+		 WHERE user_no = #{user_no}
+	</select>
+	
+	
+	<select id="movieInfo" parameterType="int" resultType="com.koreait.movie.dto.CommentDto">
+	    SELECT movie_no, comments_title, comment_date
+		  FROM comments
+		 WHERE user_no = #{user_no}
+	</select>
+	
+	<update id="userUpdate" parameterType="com.koreait.movie.dto.UserDto">
+		
+		update users
+		set user_nickname = #{user_nickname},
+			user_name = #{user_name},
+			user_email = #{user_email},
+			user_phone = #{user_phone},
+			user_pw = #{user_pw}
+		where user_no = #{user_no}
+	</update>
+	
+	<select id="sessionUser" parameterType="int" resultType="com.koreait.movie.dto.UserDto">
+		select *
+		from users
+		where user_no = #{userNo}
+	</select>
+
+  <select id="userWriteTotalCount" parameterType="int" resultType="int">
+		select count(*)
+		from comments
+		where user_no = #{userNo}
+	</select>
+	
+	<select id="loginUserCommentList" parameterType="Map" resultType="com.koreait.movie.dto.CommentDto">
+		select z.*
+		  from (select rownum as rn, x.*
+		  		  from (
+			  		  	select a.*, nvl(b.star_score, 0)  as comment_score, c.user_nickname
+			            from comments a, movie_score b, users c
+			            where a.movie_no = b.movie_no(+)
+			            and a.user_no = b.user_no(+)
+			            and a.user_no = c.user_no
+			            and a.user_no = #{userNo}
+		  		   	  order by comment_date DESC) x) z
+		 where z.rn between #{beginRecord} AND #{endRecord}
+	</select>
+	
+	<select id="getMovieTitle" parameterType="int" resultType="String">
+		select movie_title
+		from movie
+		where movie_no = #{movieNo}
+	</select>
+	
+	<update id="updateComment">
+		update comments
+		set comments_title = #{param1},
+			comment_content = #{param2}
+		where comment_no = #{param3}
+	</update>
+	
+	<delete id="deleteComment" parameterType="int">
+		delete
+		from comments
+		where comment_no = #{commentNo}
+	</delete>
+	
+
+	<select id="pwCheck"  parameterType="String" resultType="int">
+		select user_no
+		from users
+		where user_pw = #{pw}
+	</select>
+
+	<update id="userAddProfile"> 
+		update users
+		set user_profile_name = #{param1}
+		where user_no = #{param2}
+	
+	</update>
+	
+	<update id="userAddCover">
+		update users
+		set user_image_name = #{param1}
+		where user_no = #{param2}
+	
+	</update>
+	
+	<select id="wishListCount" parameterType="int" resultType="int">
+		select count(*)
+		from wishList
+		where user_no = #{userNo}
+	</select>
+	
+	<select id="commentListCount" parameterType="int" resultType="int">
+		select count(*)
+		from comments
+		where user_no = #{userNo}
+	</select>
+	
+	<select id="wishList" parameterType="int" resultType="com.koreait.movie.dto.MovieDto">
+		select *
+		from movie
+		where movie_no in (
+			select movie_no
+			from wishList
+			where user_no = #{userNo}
+		)
+	</select>
+	
+</mapper>

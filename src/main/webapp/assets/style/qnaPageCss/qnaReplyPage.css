@@ -1,0 +1,69 @@
+@charset "UTF-8";
+	
+	body {
+		background: white;
+	}
+	
+	.wrap {
+		width: 100%;
+	}
+    .main_head {
+        width: 100%;
+        height: 15%;
+        margin-top: 100px;
+    }
+    
+    h3 {
+        position: absolute;
+        top:60%;
+        left:25%;
+        font-size: 35px;
+        font-weight:bold;
+    }
+    .main_body {
+        width: 90%;
+        height: 70%;
+        position: absolute;
+        top: 25%;
+        left: 5%;
+        margin: 0px auto;
+    }
+    .box1 {
+        width: 60%;
+        height: 100%;
+        border: 2px solid;
+        margin: 0px auto;
+    }
+    .box2 {
+        width: 100%;
+        height: 70%;
+        position: relative;
+        top:10%;
+    }
+    .box3 {
+        width:100%;
+        height: 70%;
+        position: relative;
+        bottom: 7%;
+        right: 10%;
+    }
+    .qna_reply_content {
+        width:95%;
+        height: 95%;
+        position:absolute;
+        top: 0%;
+        left:2.5%;
+    }
+    .btn {
+        width:100px;
+        height: 44px;
+        position: absolute;
+        right: 47%;
+        bottom: 8%;
+        font-size: 16px;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        line-height: 2.5em;
+        border-radius : 4px;
+        background-color: #ec7114;
+    }

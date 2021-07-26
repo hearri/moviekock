@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.koreait.movie.dao.SignupSigninDao">
+
+	<select id="signIdCheck" parameterType="String" resultType="int">
+		select user_no
+		from users
+		where user_id = #{id}
+	</select>
+	
+	<select id="signNickCheck" parameterType="String" resultType="int">
+		select user_no
+		from users
+		where user_nickname = #{nick}
+	</select>
+	
+	<select id="signEmailCheck" parameterType="String" resultType="int">
+		select user_no
+		from users
+		where user_email = #{email}
+	</select>
+	
+	<insert id="signUserInsert" parameterType="com.koreait.movie.dto.UserDto">
+		insert 
+		into users
+		values(users_seq.nextval,
+		 	#{user_id},
+		  	#{user_pw},
+	  		#{user_nickname},
+		   	#{user_name},
+		    #{user_email},
+		    #{user_phone},
+		      sysdate,
+		       'none',
+		       'none')
+
+	</insert>
+	
+
+	<select id="loginUser" parameterType="com.koreait.movie.dto.UserDto" resultType="com.koreait.movie.dto.UserDto">
+		select *
+		  from users
+		 where user_id=#{user_id} and
+		  	   user_pw=#{user_pw}
+
+	</select>
+	
+	<!-- 회원가입시 영화 선택 디폴트 리스트 -->
+	<select id="signMovieDefaultList" resultType="com.koreait.movie.dto.MovieDto">
+		select *
+		from movie
+		where movie_no between 1 and 18
+
+	</select>
+	
+	<!-- 회원가입시 영화 선택 장르 번호 -->
+	<select id="userSelectMovieList" parameterType="Map" resultType="String">
+	
+		select distinct genre_no
+		from movie_genre
+		where movie_no in 
+		<foreach collection="movieList" item="movie_no" open="(" separator="," close=")">
+			#{movie_no}
+		</foreach>
+		
+	</select>
+	
+	<!-- 회원가입시 선택한 영화 장르 삽입 -->
+	<insert id="userInsertGenre" parameterType="Map">
+		
+		<foreach collection="genre" item="genre_no" open="INSERT ALL " separator=" " close="SELECT * FROM DUAL">
+			into
+			movie_taste
+			values
+		    (FN_GET_SEQ('MOVIE_TASTE_SEQ'), #{genre_no}, #{user_no} )
+		</foreach>
+	</insert>
+	
+	<!-- 전체 영화 수 구하기 -->
+	<select id="totalMovieRecord" resultType="int">
+		select count(*)
+		from movie
+	</select>
+	
+	<!-- 스크롤 시 불러올 영화 리스트 -->
+	<select id="scrollMovieList" parameterType="Map" resultType="com.koreait.movie.dto.MovieDto">
+		select *
+		from movie
+		where movie_no between #{beginRecord} and #{endRecord}
+	</select>
+	
+	<select id="findId" parameterType="com.koreait.movie.dto.UserDto" resultType="com.koreait.movie.dto.UserDto">
+		select *
+		  from users
+		 where user_name=#{user_name} and
+		 	   user_email=#{user_email}
+	</select>
+	
+	<select id="findPw" parameterType="com.koreait.movie.dto.UserDto" resultType="com.koreait.movie.dto.UserDto">
+		select *
+		  from users
+		 where user_name=#{user_name} and
+		 	   user_email=#{user_email} and
+		 	   user_id=#{user_id}
+	</select>
+	
+	<update id="updatePw">
+		update users
+		   set user_pw=#{param1}
+		 where user_id=#{param2}
+	</update>
+	</mapper>

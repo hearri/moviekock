@@ -1,0 +1,155 @@
+@charset "UTF-8";
+	
+	a {
+		text-decoration: none;
+		outline: none;
+		color: #141414;
+	}
+	a:focus,
+	a:active,
+	a:hover {
+		text-decoration: none;
+		outline: none;
+		color: #74747B;
+	}
+	
+	.qna_txt{
+		color: #141414;
+		font-size: 32px;
+		top : -50px;
+		font-weight: bold;
+		position: relative;
+	}
+	
+	body {
+		background: #e8e5e578;
+		margin-top: 100px;
+	}
+
+	.wrap {
+			display: grid;
+			place-items: center;
+		    margin-top: 100px;
+		    background-color: white;
+		    width: 900px;
+		    height: 800px;
+		    margin: auto;
+		}
+	
+	.main_wrap {
+		width: 630px;
+		margin: auto;
+		text-align: center;
+		
+	}
+    .main_head {
+        width: 630px;
+    }
+    
+    p {
+        font-size: 42px;
+        font-weight:bold;
+    }
+    .main_body {
+        width: 630px;
+        margin:50px auto;
+    }
+    
+
+    .box1 {
+        width: 730px;
+        border: 2px solid #74747B;
+        border-radius: 3px;
+       /*  margin: 10px auto; */
+        padding: 10px;
+        margin-left: -60px;
+        margin-top: -50px;
+     
+    }
+    .box2 {
+        width: 100%;
+        display: flex;
+        margin-bottom: 20px;
+    }
+    
+    .box2_left {
+    	width: 50%;
+    }
+    
+    .title {
+        width:250px; 
+        height: 27px;
+        display: flex;
+    }
+    
+    .box2_right {
+    	width: 50%;
+    	text-align: right;
+    }
+    .box3{
+        width: 100%;
+        height: 350px;
+        margin: 0px auto;
+    }
+    .select {
+        width: 90px;
+        height: 20px;
+        font-size: 13px;
+        display: flex;
+        margin-bottom:5px;
+    }
+
+    .content {
+        width:100%;
+        height:95%;
+        resize: none;
+    }
+    
+    .secret2:active > .pw {
+        visibility: visible;
+    }
+    
+    .display-none {
+    	display: none;
+    }
+    .display-block {
+    	float: right;
+    	display: block;
+    	width : 220px;
+    	padding-left: 12px;
+    }
+    #secret_btn {
+        display: inline-block;
+        text-align: right;
+        font-size:13px;
+        margin-bottom: 10px;
+    }
+
+    #secret:checked ~ * .expandable {
+        visibility: visible;
+    }
+    #expand-toggle:checked ~ #expand-btn {
+        background-color: #ccc;
+    }
+ 	.left{
+    	width : 50px;
+    	font-size: 13px;
+    	float: left;
+    } 
+    .box5 {
+       width:100%;
+       height: 60px;
+    }
+    .send_btn {
+        font-size: 13px;
+        height : 22px;
+        text-align: center;
+        border-radius: 4px;
+        background-color: #646ECB;
+        outline: none;
+        border: none;
+        font-weight: bold;
+        float: right;
+        color : white;
+      }
+      

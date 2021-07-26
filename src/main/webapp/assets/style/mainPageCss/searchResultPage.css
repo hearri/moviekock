@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+.main {
+	margin: 40px;
+}
+
+.title {
+	margin-left:30px;
+}
+
+.container {
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	padding: 10px !important;
+	margin: 10px !important;
+	justify-content: flex-start;
+	align-content: flex-start;
+	padding-top: 50px !important;
+}
+
+.info {
+	font-size: 15px;
+	letter-spacing: -0.4px;
+	line-height: 30px;
+	width: 230px;
+	margin-left: 45px;
+}
+
+.mainMovieList{
+	margin-bottom: 40px;
+	cursor: pointer;
+}
+
+.list {
+	width: 230px;
+	height: 350px;
+	overflow: hidden;
+	margin-left: 45px;
+}
+
+img {
+	width: 100%;
+	border-radius: 1.5rem;
+	height: 100%;
+}

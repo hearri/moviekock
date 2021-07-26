@@ -1,0 +1,177 @@
+@charset "UTF-8";
+	body{
+		background-color: #F8F8F8;
+	
+	}
+        .big-box{
+            border: 2px solid #e6e6e6;
+            border-radius: 5px;
+            width: 600px;
+            height: 830px;
+            margin: auto;
+            position: relative;
+            margin-top: 110px;
+        	overflow: hidden;
+        }
+        
+        .small-box{
+	        padding: 10px;
+        }
+        
+        label {
+        	border: none;
+        }
+        
+        .card_box {
+        	display: flex;
+        	flex-flow: wrap;
+        	margin: 0px 10px;
+        }
+        
+        #card-box1{
+            width: 570px;
+            height: 290px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #e6e6e6;
+            position: relative;
+            top: -10px;
+        }
+        
+        #card-box2{
+            width: 255px;
+            height: 160px;
+            padding-right: 15px;
+            border-right: 2px solid #e6e6e6;
+            text-align: center;
+		    padding: 30px;
+		    font-size: 28px;
+		    cursor: pointer;
+		    background-color: #8CDB5C;
+		    border-radius: 5px;
+		    margin-right: 20px;
+		    margin-left: 15px;
+        }
+        #card-box3{
+        	width: 255px;
+            height: 160px;
+            text-align: center;
+		    padding: 30px;
+		    font-size: 28px;
+   		    cursor: pointer;
+   		    background-color: #FFC171;
+   		    border-radius: 5px;
+		    
+        }
+        
+        #alter{
+            width: 40px;
+            margin-top: 10px;
+            float: right;
+        }
+
+        textarea{
+        	border-color: white;
+        }
+        
+       
+		
+			
+		.contentTextArea{ 
+					width: 100%;
+					height: 380px;
+					resize: none;
+				} 
+			
+
+		
+		.textOutline{
+			border: none;
+			outline: none;
+		} 
+			
+
+		
+		.coverBox{
+		    width: 100%;
+		    height: 33%;
+	        line-height: 250px;
+   			text-align: center;
+   			background-size: 100% 100%;
+   			border-bottom: 4px solid #e6e6e6;
+   			background-image:url('/movie/assets/images/cover.jpg')
+		}
+		
+		.inp_btn {
+			background: #646ECB;
+			outline: none;
+			border: none;
+			border-radius: 5px;
+			font-weight: 150;
+			height: 30px;
+			color: white;
+		}
+		
+		.inp_txt{
+			border: none;
+			outline: none;
+			border-bottom: 1px solid #ddd;
+			font-size: 16px;
+			font-weight: bold;
+			color: #74747B;
+			margin-top: 18px;
+		}
+
+		.inp_txt:focus {
+			border-bottom: 1px solid #646ECB;
+		}
+		
+		.info_txt {
+			font-size: 16px;
+			font-weight: bold;
+		}
+		
+		.info_box {
+			margin-top: -30px;
+		}
+		
+		.update_btn{
+			margin-top: 10px;
+		}
+	.profileBox {
+		    width: 80px;
+		    height: 80px;
+		    border-radius: 75px;
+		    position: relative;
+		    top: -45px;
+		    left: 25px;
+		    line-height: 130px;
+   			text-align: center;
+   			background-size: 80px 80px;
+   			background-image:url('/movie/assets/images/profile.png');
+   			
+		} 
+		.possible{
+			color : green;
+		}
+		.impossible{
+			color : red;
+		}
+		.none{
+			display: none;
+		}
+		
+		#addProfileBtn,
+		#changeProfileBtn,
+		#addCoverBtn,
+		#changeCoverBtn{
+			display: none;
+		}
+        .profileAddLabel,
+        .profileChangeLabel,
+        .coverAddLabel,
+        .coverChangeLabel{
+        	cursor: pointer;
+        	width: 100%;
+   			height: 100%;
+        }
+        

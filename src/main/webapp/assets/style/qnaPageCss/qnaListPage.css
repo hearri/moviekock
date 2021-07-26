@@ -1,0 +1,154 @@
+	@charset "UTF-8";
+	
+	@charset "UTF-8";
+	
+		a {
+			text-decoration: none;
+			outline: none;
+			color: #141414;
+		}
+		a:focus,
+		a:active,
+		a:hover {
+			text-decoration: none;
+			outline: none;
+			color: #74747B;
+		}
+		
+		.qna_txt{
+			color: #141414;
+			font-size: 32px;
+			margin-right: 10px;
+			font-weight: bold;
+			margin: auto;
+			margin-right: 320px;
+			
+		}
+		.qna_do{
+			color: #141414;
+			font-size: 13px;
+			text-align: center;
+			position: absolute;
+			top :40px;
+			right: 6px
+		}
+		
+		.qna_txt:action,
+		.qna_txt:focus {
+			color: #ec7114;
+		}
+	
+		body {
+			background: #e8e5e578;
+			margin-top: 100px;
+		}
+		.wrap {
+			display: grid;
+			place-items: center;
+		    margin-top: 130px;
+		    background-color: white;
+		    width: 900px;
+		    height: 800px;
+		    margin: auto;
+		
+		}
+		
+		.main {
+			position :absolute;
+			width: 800px;
+			top: 150px;
+		}
+		
+		.main_top_font {
+			display: flex;
+			font-size: 20px;
+			padding-left: 10px;
+		}
+		
+		.qna_list {
+			margin-right: 20px;
+		}
+		
+		.table > thead > tr {
+			width: 768px;
+			border-radius: 2px;
+		}
+		.table > tfoot > tr > td {
+			width: 768px;
+			height: 10px;
+		}
+		
+		.main_bot {
+			
+			border-radius: 2px;
+			margin-bottom: auto;
+			margin-left: 100px;
+			margin-top:23px;
+		}
+		
+		.main_bot_inner{
+			border: 1px solid #141414;
+		}
+		.table {
+			text-align: center;
+		}
+		
+		.qna_list_1st_tr {
+			background: #ddd;
+		}
+		
+			/* MODAL*/
+		
+		.modal_dialog {
+			width: 400px;
+			height: 300px;
+			margin-top: 300px;
+			margin-left: 750px;
+			border: 1px solid;
+			border-radius: 35px;
+			background: white;
+		}
+		
+		.modal_content {
+			height: 100%;
+		}
+		
+		.modal_title {
+			margin-top: 50px;
+			font-weight: bold;
+			text-align: center;
+			background: #ec7114;
+		}
+		
+		#inpPw {
+			margin-top: 75px;
+			margin-left: 110px;
+		}
+		
+		.modal_footer{
+			padding: 0px 15px;
+		}
+		
+		.modal_close {
+			width: 80px;
+			height: 40px;
+			border-radius: 15px;
+			background-color: #ec7114;
+			margin-top: 50px;
+			margin-left: 100px;
+			outline: none;
+			font-weight: bold;
+			border: none;
+		}
+		
+		.go_btn {
+			width: 80px;
+			height: 40px;
+			border-radius: 15px;
+			background-color: #ec7114;
+			margin-top: 50px;
+			margin-left: 25px;
+			outline: none;
+			font-weight: bold;
+			border: none;
+		}

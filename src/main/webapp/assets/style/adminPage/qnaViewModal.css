@@ -1,0 +1,43 @@
+@charset "UTF-8";
+.modalContainer {
+    padding: 0px;
+    border: 1px solid #fab177;
+    border-collapse: collapse;
+}
+
+.contentBox {
+    width: 100%;
+    height: 300px;
+    border-bottom: 1px solid #fab177;
+    background-size: 100% 300px;
+}
+
+.contentsBox {
+    height: 378px;
+    display: flex;
+}
+
+.profileBox {
+    width: 300px;
+    border-right: 1px solid #fab177;
+    background-size: 100% 100%;
+    
+}
+
+.qnaInfoBox {
+    width: 100%;
+}
+
+span.desc {
+    background: #fab177;
+    font-weight: bold;
+}
+
+.qnaInfoTable td, .qnaInfoTable th {
+    padding: 13px;
+}
+
+.qnaInfoTable{
+	
+}
+

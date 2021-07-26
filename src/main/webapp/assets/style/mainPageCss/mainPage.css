@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+body {
+	margin-top: 100px !important;
+}
+
+.wrap {
+	display: grid;
+	place-items: center;
+	height: 100%;
+	margin-top: -3px;
+	background: white;
+}
+
+.section {
+	box-sizing: border-box;
+	height: 50%;
+}
+
+/* list*/
+.main {
+	position: relative;
+	margin: 1px 50px 1px 120px;
+	width: 1300px;
+}
+
+.wrap h3 {
+	color: #141414;
+}
+
+.text > p, h4{
+	font-weight: bold;
+	color: #ddd;
+}
+
+
+.swiper-wrapper {
+	height: 260px !important;
+}
+
+.swiper-container {
+	width: 1200px;
+	height: 330px;
+	position: absolute;
+}
+
+.rankBadge {
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	background-color: rgba(0, 0, 0, 0.77);
+	color: rgb(255, 255, 255);
+	font-weight: 800;
+	text-align: center;
+	border-radius: 4px;
+	position: absolute;
+	z-index: 2;
+}
+
+.swiper-slide, img {
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+img {
+	width: 185px;
+	height: 100%;
+	position: absolute;
+}
+
+h3{
+	font-weight: bold;
+}
+
+.info {
+	position: absolute;
+	top: 100%;
+	width: 200px;
+	font-size: 15px;
+	background-color: #3e3b3b;
+}
+
+.swiper-slide:hover img {
+	filter: blur(10px);
+	-webkit-filter: blur(10px);
+	transition: all 4s;
+}
+
+.swiper-slide:hover .info {
+	background-color: #3e3b3b;
+	padding-left: 10px;
+	color: white;
+	top: 65%; /* 숫자 높을수록 텍스트는 낮게 올라옴*/
+	transition: all 2s;
+	opacity: 0.8;
+}
+
+.swiper-button-next, .swiper-button-prev {
+	color: #ddd !important;
+	top: 60% !important;
+}
+
+
+.wrap .swiper-slide{
+	cursor: pointer;
+}

@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+body {
+	background: white;
+}
+	.signupPage_top_logo {
+		text-align: center;
+	}
+	.top_logo{
+		width: 7%;
+	}
+	
+	.wrap {
+		width: 100%;
+		text-align: center;
+		margin: auto;
+		margin-top : 10px;
+	}
+	
+	.main {
+		font-size:20px;
+		text-align: center;
+	}
+	
+	.pa_top_font{
+		font-weight: bold;
+	}
+	
+	.pa_mid{
+		border-radius: 10px;
+		display: inline-block;
+		font-weight: bold;
+	}
+	
+	.pa_mid_font {
+		margin-top : 10px;
+		font-size: 80%;
+	}
+	
+	
+	.pa_bot {
+		display: block;
+		margin-top: 20px;
+	}
+	
+	.table {
+		font-weight: bold;
+		border-radius: 10px;
+		display: inline-block;
+		font-size: 70%;
+	}
+	
+	
+	.tr {
+		display: inline-block;
+		margin: 10px;
+	}
+	
+	.tr > .td:nth-of-type(1) {
+		border-bottom: 1px solid #ccc;
+	}
+	
+	.pa_btns{
+		display: inline-block;
+		margin-top: 20px;
+	}
+	
+	.pa_btn_no, .pa_btn_yes {
+		width: 60px;
+		height: 40px;
+		border-radius: 5px;
+		color: white;
+		font-size:15px;
+		font-weight: bold;
+	}
+	
+	.pa_btn_no, .pa_btn_yes:hover {
+	
+	}
+	.pa_btn_no {
+		border: none;
+		background: #fff;
+		background-color: #CED7E0;
+	}
+	
+	.pa_btn_yes {
+		border: none;
+		background-color: #A2A8B4;
+	}

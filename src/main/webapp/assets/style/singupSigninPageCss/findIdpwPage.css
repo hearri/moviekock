@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+body {
+	margin: 0px;
+	background: white;
+}
+
+.findPage_logo {
+	width: 100px;
+	height: 100px;
+}
+
+.id-pw-main-wrapper {
+	margin: auto;
+	width: 1000px;
+	height: 650px;
+}
+
+.logo-wrapper {
+	width: 100%;
+	text-align: center;
+}
+
+.logo-px {
+	margin-top: 50px;
+}
+
+.contents-wrapper {
+	width: 100%;
+	height: 81%;
+}
+
+.id-pw-form-box {
+	display: flex;
+	border-radius: 15px;
+	width: 100%;
+	height: 74%;
+	border: 3px solid #ec7114;
+	background: white;
+	margin: auto;
+	margin-top: 100px;
+}
+
+.id-section, .pw-section {
+	width: 50%;
+	padding: 50px;
+	position: relative;
+}
+
+.pw-section {
+	border-left: 2px solid #666666;
+}
+
+.section-header {
+	font-size: 26px;
+}
+
+.inputs {
+	padding: 12px;
+	width: 300px;
+	border-bottom: 2px solid #ddd;
+	margin: 10px 10px 10px 0px;
+}
+
+.input-id, .input-pw-name {
+	margin-top: 35px;
+}
+
+input {
+	font-weight: bold;
+	border: none;
+	outline: none;
+}
+
+input:focus {
+	outline: none !important;
+	border-bottom: 2px solid #ec7114;
+}
+
+.btn btn-info {
+	position: absolute;
+	padding: 10px;
+	right: 120px;
+	bottom: 60px;
+}
+
+.txt{
+	color: #ddd;
+}
+
+.inp_btn{
+	width: 120px;
+	height: 40px;
+	border-radius: 15px;
+	background-color: #ec7114;
+	color: white;
+}

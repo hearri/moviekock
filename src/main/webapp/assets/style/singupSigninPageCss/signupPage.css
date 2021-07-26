@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+.txt{
+	color: black;
+}
+
+body {
+	background: white;
+}
+	
+	.signupPage_top_logo {
+		text-align: center;
+	}
+	.top_logo{
+		width: 5%;
+	}
+	
+	.top_text {
+		font-size: 20px;
+		font-weight: bold;
+	}	
+	
+	.wrap {
+		width: 100%;
+		text-align: center;
+	}
+	
+	#main-wrap{
+		margin : auto;
+		width : 400px;
+		border : 2px solid #EAEAEA;
+		padding : 30px;
+	
+	}
+	.main {
+		display: inline-block;
+		margin: auto;
+		font-size:20px;
+		text-align: left;
+		font-weight: 600;
+	}
+	
+	.label_text{
+		margin-top : 18px;
+		font-size: 10px;
+		font-weight: bold;
+		margin-left: 7px;
+	}
+	
+	
+	input:focus {
+		outline:none;
+		border-bottom: 1px solid black;
+	}
+	
+	.inp_txt {
+		width: 300px;
+		height: 30px;
+		border: 0px;
+		border-bottom: 1px solid #ddd;
+		margin: 0px;
+		font-size: 12px;
+		padding: 0px 0px 0px 10px;
+		font-weight: bold;
+		margin-top:5px;
+	}
+	
+
+	.inp_btn,
+	.inp_btn_bot {
+		width: 60px;
+		height: 25px;
+		font-weight: bold;
+		background: #EAEAEA;
+		border: none;
+		border-radius: 5px;
+		font-size: 12px;
+	}
+	
+	.inp_btn_bot {
+		margin-top: 30px;
+	}
+	
+	
+	.inp_btn:hover,.inp_btn_bot:hover{
+		background-color: #646ECB;
+		color: white;
+	}
+	
+	.normal{
+		font-size: 13px;
+		color: gray;
+	}
+	
+	.possible{
+		font-size: 10px;
+		color: green;
+	}
+	
+	.impossible{
+		font-size: 10px;
+		color: red;
+	}

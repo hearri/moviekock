@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.main-wrap{
+	    border: 1px solid black;
+	    width: 1200px;
+	    margin: auto;
+	    height: 500px;
+	    border-radius: 10px;
+}
+.usersBtn:hover, .commentsBtn:hover, .qnaBtn:hover {
+  		background: gainsboro;
+}
+.moviesBtn {
+    background: #fab177;
+    border-radius: 5px;
+}
+.inner-wrap {
+    width: 1000px;
+    margin: auto;
+    height: 450px;
+    margin-top: 25px;
+}
+	

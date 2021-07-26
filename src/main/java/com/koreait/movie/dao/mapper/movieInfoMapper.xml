@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.koreait.movie.dao.MovieInfoDao">
+	
+	
+	<select id="movieCount" resultType="int">
+		select count(*) 
+		 from movie
+	</select>
+	
+	
+	<select id="movieTitle" parameterType = "int" resultType="String">
+		select movie_title
+			from movie
+		where movie_no = #{no}
+	</select>
+	
+	<select id="movieList" parameterType="int" resultType="com.koreait.movie.dto.MovieDto">
+ 		select distinct a.movie_title
+ 			from movie a, genre b, movie_genre, movie_genre c
+ 		where b.genre_no = #{situNo}
+ 			and a.movie_no = c.movie_no
+	</select>
+	
+	<select id="getMovie" parameterType="int" resultType="com.koreait.movie.dto.MovieDto">
+		select a.movie_no, a.movie_title, a.movie_director,
+				 a.movie_audience, a.movie_opening_date, a.movie_nation,
+				  a.movie_story, a.movie_web_score, LISTAGG(c.genre_name, ',') within group (order by c.genre_name) as genre_name
+		from movie a, movie_genre b, genre c 
+		where a.movie_no = b.movie_no
+		and b.genre_no = c.genre_no
+		and a.movie_no = #{movieNo}
+		group by a.movie_no, a.movie_title,
+				 a.movie_director, a.movie_audience,
+				 a.movie_opening_date, a.movie_nation,
+				 a.movie_story, a.movie_web_score
+	</select>
+	
+	<select id="getMovieActor" parameterType="int" resultType="String">
+		select actor_name
+		from movie_actor a, actor b
+		where a.actor_no = b.actor_no
+		and a.movie_no = #{movieNo}
+		
+	</select>
+	
+	<select id="getRelationMovieList" parameterType="int" resultType="com.koreait.movie.dto.MovieDto">
+		select distinct(a.movie_no), a.movie_title, a.movie_director, a.movie_audience,
+				a.movie_opening_date, a.movie_nation, genre_name, a.movie_web_score
+		from movie a, movie_genre b, (select
+		                                    movie_no,
+		                                    LISTAGG(genre.genre_name, ',') within group (order by genre.genre_name) as genre_name
+			                                from movie_genre , genre
+			                                where movie_genre.genre_no = genre.genre_no
+			                            	group by movie_no) genre
+		where a.movie_no = b.movie_no
+		and a.movie_no = genre.movie_no
+		and b.genre_no in (
+		                    select genre_no
+		                    from movie_genre
+		                    where movie_no = #{movieNo})
+		and b.movie_no not in(#{movieNo})
+		order by DBMS_RANDOM.RANDOM
+	
+	</select>
+	
+	<insert id="setStarScore">
+		insert into movie_score
+		values(movie_score_seq.nextval, #{param3}, #{param2}, #{param1})
+	</insert>
+	
+	<update id="updateStarScore">
+		update movie_score
+		set star_score = #{param1}
+		where movie_score_no = #{param2}
+	</update>
+	
+	<select id="seachUserStarScore" resultType="com.koreait.movie.dto.MovieScoreDto">
+		select movie_score_no,star_score
+		from movie_score
+		where user_no = #{param1}
+		and movie_no = #{param2}
+	</select>
+	
+	<insert id="commentInsert" parameterType="com.koreait.movie.dto.CommentDto">
+		insert into comments
+		values(comments_seq.nextval, #{comment_content}, sysdate, #{user_no}, #{movie_no}, 0, #{comments_title})
+	</insert>
+	
+	<select id="commentList" parameterType="int" resultType="com.koreait.movie.dto.CommentDto">
+		select *
+		from(
+		    select rownum as rn, x.*
+		    from (
+		    select a.*, nvl(b.star_score, 0)  as comment_score, c.user_nickname
+		            from comments a, movie_score b, users c
+		            where a.movie_no = b.movie_no(+)
+		            and a.user_no = b.user_no(+)
+		            and a.user_no = c.user_no
+		            and a.movie_no = #{movieNo}
+		            order by a.comment_no desc) x) z
+		where z.rn between 1 and 3
+	</select>
+	
+	<select id="totalCommentRecord" parameterType="int" resultType="int">
+		select count(*)
+		from comments
+		where movie_no = #{movieNo}
+		
+	</select>
+	
+	<select id="scrollCommentList" parameterType="map" resultType="com.koreait.movie.dto.CommentDto">
+		select *
+		from(
+		    select rownum as rn, x.*
+		    from (
+		    select a.*, nvl(b.star_score, 0)  as comment_score, c.user_nickname
+		            from comments a, movie_score b, users c
+		            where a.movie_no = b.movie_no(+)
+		            and a.user_no = b.user_no(+)
+		            and a.user_no = c.user_no
+		            and a.movie_no = #{movieNo}
+		            order by a.comment_no desc) x) z
+		where z.rn between #{beginRecord} and #{endRecord}  
+	</select>
+	
+	<insert id="insertWishList">
+		insert into wishList
+		values(wishList_seq.nextval, #{param1}, #{param2})
+	</insert>
+	
+	<delete id="deleteWishList">
+		delete
+		from wishList
+		where user_no = #{param1}
+		and movie_no = #{param2}
+	</delete>
+	
+	<select id="selectWishList" parameterType="map" resultType="com.koreait.movie.dto.WishListDto">
+		select *
+		from wishList
+		where user_no = #{userNo}
+		and movie_no = #{movieNo}
+	</select>
+	
+</mapper>

@@ -1,0 +1,134 @@
+@charset "UTF-8";
+
+.wrap {
+	/* display: grid; */
+	/* place-items: center; */
+	height: 750px;
+	width: 900px;
+	margin: auto;
+	position: relative;
+	top: 220px;
+}
+
+.main {
+	margin: auto;
+	width: 800px;
+}
+
+#title{
+	text-align: center;
+}
+.table_user_write {
+	width: 700px;
+	border-bottom: hidden;
+}
+
+tr,td{
+	border: 1px solid black;
+	height: 30px;
+	padding-left: 5px; 
+}
+.table_reply_content {
+	width: 700px;
+	/* margin-top: 30px; */
+}
+
+.main_body {
+/* 	border: 1px solid black;
+	border-radius: 3px; */
+	padding: 15px;
+	height: 450px;
+	width: 100%;
+	background:white;
+}
+
+.user_write_tr {
+	margin: auto;
+	width: 770px;
+	text-align: center;
+}
+
+.reply_content_tr {
+	margin: auto;
+	background: #ddd;
+	width: 770px;
+	text-align: center;
+	font-weight: bold;
+}
+.reply_content_td_resp{
+	text-align: center;
+}
+.user_write_td_resp {
+	border: 1px solid black;
+	height: 200px;
+}
+
+.user_write_td{
+	background: #ddd;
+	font-weight: bold;
+}
+.user_write_tr>.td:nth-of-type(2) {
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	width: 400px;
+	margin: auto;
+}
+.reply_content_tr>.td:nth-of-type(2) {
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	width: 400px;
+	margin: auto;
+}
+
+.qna_reply_btn {
+	  width:100px;
+	  height: 44px;
+	  position: absolute;
+	  left: 36%;
+	  top: 55%;
+	  font-size: 16px;
+	  background-color: #646ECB;
+	  text-align: center;
+	  line-height: 2.5em;
+	  border-radius : 4px;
+	  background-color: #646ECB;
+	  
+}
+.list_btn { 
+	  width:50px;
+	  height: 35px;
+	  position: relative;
+	  font-size: 16px;
+	  background-color: #646ECB;
+	  color: white;
+	  text-align: center;
+	  line-height: 35px;
+	  border-radius : 4px;
+	  background-color: #646ECB;
+	  border: 1px solid #646ECB;
+	  left: 720px;
+	  top : 200px;
+}
+
+.delete_btn { 
+	  width:50px;
+	  height: 35px;
+	  position: relative;
+	  font-size: 16px;
+	  color: white;
+	  text-align: center;
+	  line-height: 35px;
+	  border-radius : 4px;
+	  background-color: #646ECB;
+	  border: 1px solid #646ECB;
+	  left: 665px;
+	  top : 235px;
+}
+
+.user_write_td_fst {
+	width: 500px !important;
+}
+.user_write_tr > td {
+	width: 150px;
+}
+

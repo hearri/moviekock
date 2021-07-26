@@ -1,0 +1,50 @@
+@charset "UTF-8";
+.modalContainer {
+    padding: 0px;
+    border: 1px solid #fab177;
+    border-collapse: collapse;
+}
+
+.snapShotBox {
+    width: 100%;
+    height: 300px;
+    border-bottom: 1px solid #fab177;
+    background-size: 100% 300px;
+}
+
+.posterBox {
+    width: 300px;
+    border-right: 1px solid #fab177;
+    background-size: 100% 100%;
+    
+}
+.contentsBox {
+    height: 378px;
+    display: flex;
+}
+
+.movieInfoBox {
+    width: 100%;
+    display: flex;
+}
+
+span.desc {
+    background: #fab177;
+    font-weight: bold;
+}
+
+.movieInfoTable td, .movieInfoTable th {
+    padding: 10px;
+}
+
+#movieStory{
+	margin: 0px;
+ 	height: 352px;
+	width: 291px;
+	resize: none;
+}
+.story {
+    text-align: center;
+    width: 290px;
+}
+

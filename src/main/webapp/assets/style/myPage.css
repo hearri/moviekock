@@ -1,0 +1,193 @@
+@charset "UTF-8";
+
+body {
+	background: #141414;
+}
+        .big-box{
+            border: 4px solid black;
+            border-radius: 30px;
+            width: 600px;
+            height: 800px;
+            margin: auto;
+            position: relative;
+        }
+        
+        .small-box{
+            border: 3px solid black;
+            width: 230px;
+            height: 180px;
+            margin: 300px 20px 200px 20px;
+          
+        }
+        
+        #card-box1{
+            width: 490px;
+            position: absolute;
+            bottom: 50px;
+            left: 35px;
+           
+        }
+        
+        #card-box2{
+            position: absolute;
+            top : 230px;
+            left: 35px;
+            
+        }
+        #card-box3{
+            position: absolute;
+            top : 230px;
+            right: 30px;
+        }
+        
+        #alter{
+            position: absolute;
+            width: 40px;
+            bottom: 10px;
+            right: 10px;
+        }
+        
+        #profile{
+            position: absolute;
+            width : 100px;
+            height: 80px;
+            top : 220px;
+            left: 40px;
+            
+        }
+        
+        textarea{
+        	border-color: white;
+        }
+        
+        .tableBox{
+       	    width: 490px;
+		    height: 500px;
+		    /* position: absolute; */
+		    bottom: 90px;
+		    left: 35px;
+		    margin: auto;
+		    margin-top: 250px;
+		    border: 3px solid black;
+        }
+        
+        table {
+		border-collapse: collapse;
+		}
+		td, th {
+			border-top: 1px solid black;
+			border-bottom: 1px solid black;
+			padding: 5px;
+			text-align: center;
+		}
+		th {
+			background: silver;
+		}
+		
+		.pwCheck{
+		
+		}
+		
+		.paging {
+			display: flex;
+			text-align: center;
+		}
+		.paging div {
+			width: 40px;
+			height: 20px;
+		}
+		.paging .go-page:hover {
+			cursor: pointer;
+		}
+		.paging .now-page a{
+			color: lime;
+		}
+		.paging .disable a{
+			color: silver;
+			text-decoration: none;
+		}
+		
+		.contentTextArea{
+			width: 100%;
+			height: 380px;
+			resize: none;
+		}
+		
+		.footer-btn-box {
+		    width: 300px;
+		    margin-left: 745px;
+		    margin-bottom: 20px;
+		    text-align: right;
+		}
+		
+		.textOutline{
+			border: none;
+			outline: none;
+		}
+		
+		.none{
+			display: none;
+		}
+		
+	
+		
+		
+		.coverBox{
+		    border: 1px solid black;
+		    width: 100%;
+		    height: 33%;
+		    border-radius: 25px 25px 0px 0px;
+	        line-height: 250px;
+   			text-align: center;
+   			background-size: 100% 100%;
+		}
+		
+		.profileBox {
+			background: gray;
+		    width: 130px;
+		    height: 130px;
+		    border-radius: 75px;
+		    position: relative;
+		    top: -70px;
+		    left: 25px;
+		    line-height: 130px;
+   			text-align: center;
+   			background-size: 130px 130px;
+		}
+		
+		#addProfileBtn,
+		#changeProfileBtn,
+		#addCoverBtn,
+		#changeCoverBtn{
+			display: none;
+		}
+        .profileAddLabel,
+        .profileChangeLabel,
+        .coverAddLabel,
+        .coverChangeLabel{
+        	cursor: pointer;
+        	width: 100%;
+   			height: 100%;
+        }
+        
+		<!-- 부트스트랩 btn 커스터마이징 -->
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: #eee;
+}
+.btn-info:hover,
+.btn-info:focus {
+    border-color: #128496;
+    background-color: #128496;
+    color: #ccc;
+}
+.btn-info:active,
+.btn-info:visited,
+.btn-info:active:focus,
+.btn-info:active:hover {
+    border-color: #128496;
+    background-color: #128496;
+    color: #ccc;
+}
+        

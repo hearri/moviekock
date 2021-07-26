@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.movie.dao.MainDao">
+	
+	<select id="my_write" parameterType="int" resultType="com.koreait.movie.dto.CommentDto">
+		SELECT movie_no, comments_title, comment_date
+		  FROM comments
+		 WHERE user_no = #{user_no}
+	</select>
+	
+	<select id="movie_info" parameterType="int" resultType="com.koreait.movie.dto.CommentDto">
+	    SELECT movie_no, comments_title, comment_date
+		  FROM comments
+		 WHERE user_no = #{user_no}
+	</select>
+	
+
+	<select id="mainList1" parameterType="map" resultType="com.koreait.movie.dto.MovieDto">
+		 SELECT B.*
+          FROM (SELECT ROWNUM AS RN, A.*
+                  FROM (SELECT ROW_NUMBER() OVER(PARTITION BY M.movie_title ORDER BY DBMS_RANDOM.RANDOM)AS RNUM,
+                        M.*, G.GENRE_NAME
+                         FROM MOVIE M, MOVIE_GENRE MG, GENRE G
+                        WHERE M.MOVIE_NO = MG.MOVIE_NO
+                            AND G.GENRE_NO = MG.GENRE_NO
+                          <if test=' today =="월" '>AND G.GENRE_NO IN (3, 7)</if>
+                         <if test=' today =="화" '>AND G.GENRE_NO IN (9, 11)</if>
+                         <if test=' today =="수" '>AND G.GENRE_NO IN (10, 12)</if>
+                         <if test=' today =="목" '>AND G.GENRE_NO IN (8, 11)</if>
+                         <if test=' today =="금" '>AND G.GENRE_NO IN (5, 9)</if>
+                         <if test=' today =="토" '>AND G.GENRE_NO IN (1, 2)</if>
+                         <if test=' today =="일" '>AND G.GENRE_NO IN (1, 5)</if>
+                         ORDER BY DBMS_RANDOM.RANDOM)A
+                     WHERE RNUM = 1) B
+         <![CDATA[WHERE B.RN <= 12]]>
+
+	</select>
+
+	<select id="mainList2" resultType="com.koreait.movie.dto.MovieDto">
+		select b.movie_no, b.movie_title, b.movie_director, b.movie_audience, b.movie_opening_date, b.movie_nation, a.genre_name, b.movie_web_score
+		from (
+		    select a.movie_no, LISTAGG(b.genre_name, ',') within group (order by b.genre_name) as genre_name
+				from movie a, genre b, movie_genre c
+				where a.movie_no = c.movie_no
+				and b.genre_no = c.genre_no
+				group by a.movie_no
+				ORDER BY DBMS_RANDOM.RANDOM) a , movie b
+		where a.movie_no = b.movie_no
+		<![CDATA[and ROWNUM <= 12]]>
+	</select>
+
+	<select id="mainList3" resultType="com.koreait.movie.dto.MovieDto">
+		select b.movie_no, b.movie_title, b.movie_director, b.movie_audience, b.movie_opening_date, b.movie_nation, a.genre_name, b.movie_web_score
+		from (
+		    select a.movie_no, LISTAGG(b.genre_name, ',') within group (order by b.genre_name) as genre_name
+				from movie a, genre b, movie_genre c
+				where a.movie_no = c.movie_no
+				and b.genre_no = c.genre_no
+				group by a.movie_no) a , movie b
+		where a.movie_no = b.movie_no
+		<![CDATA[and ROWNUM <= 12]]>
+	</select>
+	
+	<select id="mainList4" resultType="com.koreait.movie.dto.MovieDto">
+	
+		select b.movie_no, b.movie_title, b.movie_director, b.movie_audience, b.movie_opening_date, b.movie_nation, a.genre_name, b.movie_web_score
+		from (
+		    select a.movie_no, LISTAGG(b.genre_name, ',') within group (order by b.genre_name) as genre_name
+				from movie a, genre b, movie_genre c
+				where a.movie_no = c.movie_no
+				and b.genre_no = c.genre_no
+				group by a.movie_no) a , movie b
+		where a.movie_no = b.movie_no
+		<![CDATA[and ROWNUM <= 12]]>
+		ORDER BY MOVIE_OPENING_DATE DESC
+		
+	</select>
+	
+	<select id="mainList5" resultType="com.koreait.movie.dto.MovieDto">
+		SELECT b.movie_no, b.movie_title, b.movie_director, b.movie_audience, b.movie_opening_date, b.movie_nation, a.genre_name, b.movie_web_score
+		FROM (
+			select a.movie_no, LISTAGG(b.genre_name, ',') within group (order by b.genre_name) as genre_name
+				from movie a, genre b, movie_genre c
+				where a.movie_no = c.movie_no
+				and b.genre_no = c.genre_no
+				and a.movie_nation ='한국'
+				group by a.movie_no
+			ORDER BY DBMS_RANDOM.RANDOM
+			)a , movie b
+		where a.movie_no = b.movie_no
+		<![CDATA[and ROWNUM <= 12]]>
+	</select>
+	
+	<select id="resultList" parameterType="String" resultType="com.koreait.movie.dto.MovieDto">
+		SELECT *
+		FROM movie
+		WHERE movie_title LIKE '%'|| #{search} || '%'
+			or movie_director LIKE '%'|| #{search} || '%'
+			or movie_audience LIKE '%'|| #{search} || '%'
+			or movie_nation LIKE '%'|| #{search} || '%'
+	</select>
+	
+	
+	<select id="userGenreList" parameterType="int" resultType="com.koreait.movie.dto.MovieDto">
+		select e.*
+		from (select rownum as rn, d.*
+		     from (
+		        select c.movie_no, c.movie_title, c.movie_director, c.movie_audience, c.movie_opening_date, c.movie_nation,LISTAGG(f.genre_name, ',') within group (order by f.genre_name) as genre_name
+		        		,c.movie_web_score
+		        from movie_taste a, movie_genre b, movie c, genre f
+		        where b.genre_no = a.genre_no
+		        and b.movie_no = c.movie_no
+		        and b.genre_no = f.genre_no
+		        and a.user_no = #{userNo}
+		        group by c.movie_no,c.movie_no, c.movie_title, c.movie_director, c.movie_audience, c.movie_opening_date, c.movie_nation, c.movie_web_score
+		        order by DBMS_RANDOM.RANDOM) d) e
+		where e.rn between 1 and 12
+	</select>
+</mapper>
+	

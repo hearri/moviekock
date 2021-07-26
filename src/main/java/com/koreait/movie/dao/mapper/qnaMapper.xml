@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.koreait.movie.dao.QnaDao">
+
+	<insert id="qnaWrite"
+		parameterType="com.koreait.movie.dto.QnaDto">
+		INSERT INTO
+		QNA
+		<if test="qna_pw!=null">VALUES (QNA_SEQ.NEXTVAL, #{qna_select}, #{qna_title},
+			#{qna_secret}, #{user_no}, #{qna_content}, #{qna_pw}, SYSDATE, 0)
+		</if>
+		<if test="qna_pw==null">VALUES (QNA_SEQ.NEXTVAL, #{qna_select}, #{qna_title},
+			#{qna_secret}, #{user_no}, #{qna_content}, NULL, SYSDATE, 0)
+		</if>
+	</insert>
+
+	
+	<select id="userNickname" parameterType="int" resultType="string"> 
+		SELECT USER_NICKNAME 
+		FROM USERS 
+		WHERE USER_NO = #{user_no} 
+	</select> 
+	
+	
+	<select id="qnaList" resultType="com.koreait.movie.dto.QnaDto">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		          FROM (SELECT Q.*, U.USER_NICKNAME
+		                  FROM QNA Q, USERS U
+		                 WHERE Q.USER_NO = U.USER_NO
+		              ORDER BY QNA_NO DESC) A) B
+		 WHERE B.RN BETWEEN #{param1} AND #{param2}
+	</select>
+	
+	
+	<select id="totalRecord" resultType="int">
+		SELECT COUNT(*)
+		  FROM QNA
+	</select>
+	
+	<select id="qnaView" parameterType="int" resultType="com.koreait.movie.dto.QnaDto">
+		SELECT Q.*, U.USER_NICKNAME
+		  FROM QNA Q, USERS U
+		 WHERE Q.USER_NO = U.USER_NO
+		   AND QNA_NO = #{qna_no}
+	</select>
+	
+	<update id="updateQnaYn" parameterType="int">
+		UPDATE QNA
+		   SET QNA_YN = 1
+		 WHERE QNA_NO = #{qna_no}
+	</update>
+	
+	<delete id="adminQnaDelete" parameterType="int">
+		DELETE
+		  FROM QNA
+		 WHERE QNA_NO = #{qna_no}
+	</delete>
+	
+	
+</mapper>
+
+

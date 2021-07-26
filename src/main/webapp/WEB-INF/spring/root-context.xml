@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<!-- Mybatis용 dataSource, sqlSessionFactory, sqlSession -->
+	
+	<!-- 스프링에서 지원하는 DataSource를 HiKariDataSource로 변경할 수 있습니다. -->
+	
+	<!-- 스프링 DataSource -->
+	<!--
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="spring" />
+		<property name="password" value="1111" />
+	</bean>
+	-->
+	
+	<!-- config.properties 로드하기(Namespaces 탭에서 context 체크하기) -->
+	<context:property-placeholder location="/config/*.properties" />
+	
+	<!-- HikariConfig -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="${spring.hikariConfig.driverClassName}" />
+		<property name="jdbcUrl" value="${spring.hikariConfig.jdbcUrl}" />
+		<property name="username" value="${spring.hikariConfig.username}" />
+		<property name="password" value="${spring.hikariConfig.password}" />
+	</bean>
+	
+	<!-- HikariDataSource -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig" />
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:com/koreait/movie/dao/mapper/*.xml" />
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	
+	<!-- 파일업로드용 : multipartResolver -->
+	<!-- 10485760 = 1024 * 1024 * 10 byte = 10MB -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="maxUploadSize" value="10485760" />  
+	</bean>
+	
+	<!-- 이메일 인증 : mailSender -->
+	<!-- 1. 메일을 보내는 계정은 "구글" 계정이어야만 합니다. -->
+	<!-- 2. 메일을 받는 계정은 모두 가능합니다. -->
+	<!-- 3. 정상적인 동작을 위해서 "구글 로그인" -> "보안 수준이 낮은 앱 허용"을 허용해야 합니다. -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="moviekock@gmail.com" />
+		<property name="password" value="1q2w3e4r`" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	
+	<!-- signupSignin -->
+	<bean id="idCheckCommand" class="com.koreait.movie.command.signupSignin.SignupSigninIdCheckCommand"></bean>
+	<bean id="nickCheckCommand" class="com.koreait.movie.command.signupSignin.SignupSigninNickCheckCommand"></bean>
+	<bean id="emailCheckCommand" class="com.koreait.movie.command.signupSignin.SignupSigninEmailCheckCommand"></bean>
+	<bean id="insertUserCommand" class="com.koreait.movie.command.signupSignin.SignupSigninInsertUserCommand"></bean>
+	<bean id="loginCommand" class="com.koreait.movie.command.signupSignin.SignupSigninLoginCommand"></bean>
+	<bean id="logoutCommand" class="com.koreait.movie.command.signupSignin.SignupSigninLogoutCommand"></bean>
+	<bean id="choiceMovieDefaultListCommand" class="com.koreait.movie.command.signupSignin.SignupSigninChoiceMovieDefaultListCommand"></bean>
+	<bean id="userSelectMovieListCommand" class="com.koreait.movie.command.signupSignin.SignupSigninUserSelectMovieListCommand"></bean>
+	<bean id="scrollMovieList" class="com.koreait.movie.command.signupSignin.ScrollMovieList"/>
+	<bean id="findIdCommand" class="com.koreait.movie.command.signupSignin.SignupSigninFindIdCommand"></bean>
+	
+	<!-- myPage -->
+	<bean id="myPageCommand" class="com.koreait.movie.command.myPage.MyPageCommand"></bean>
+	<bean id="userUpdateCommand" class="com.koreait.movie.command.myPage.UserUpdateCommand"></bean>
+
+	<bean id="myPagePwCommand" class="com.koreait.movie.command.myPage.MyPagePwCommand"></bean>
+
+	<!-- request 
+	<bean id="requestWriteCommand" class="com.koreait.movie.command.request.RequestWriteCommand"></bean> 
+	<bean id="requestListCommand" class="com.koreait.movie.command.request.RequestListCommand"></bean>
+	<bean id="requestViewCommand" class="com.koreait.movie.command.request.RequestViewCommand"></bean> -->
+
+	<bean id="userAddProfileCommand" class="com.koreait.movie.command.myPage.UserAddProfileCommand"></bean>
+
+
+	<bean id="userWriteListCommand" class="com.koreait.movie.command.myPage.UserWriteListCommand"></bean>
+	<bean id="getMovieTitleCommand" class="com.koreait.movie.command.myPage.GetMovieTitleCommand"></bean>
+	<bean id="commentUpdateCommand" class="com.koreait.movie.command.myPage.CommentUpdateCommand"></bean>
+	<bean id="commentDeleteCommand" class="com.koreait.movie.command.myPage.CommentDeleteCommand"></bean>
+	<bean id="findPwCommand" class="com.koreait.movie.command.signupSignin.SignupSigninFindPwCommand"></bean>
+	<bean id="updatePwCommand" class="com.koreait.movie.command.signupSignin.SignupSigninUpdatePwCommand"></bean>
+	<bean id="userAddCoverCommand" class="com.koreait.movie.command.myPage.UserAddCoverCommand"></bean>
+	
+	<!-- qna -->
+	<bean id="qnaWriteCommand" class="com.koreait.movie.command.qna.QnaWriteCommand"></bean> 
+	<bean id="qnaListCommand" class="com.koreait.movie.command.qna.QnaListCommand"></bean>
+	<bean id="qnaViewCommand" class="com.koreait.movie.command.qna.QnaViewCommand"></bean>
+	<bean id="qnaDeleteCommand" class="com.koreait.movie.command.qna.QnaDeleteCommand"></bean>
+	<bean id="qnaReplyWriteCommand" class="com.koreait.movie.command.qna.QnaReplyWriteCommand"></bean>
+	
+	
+	<!--recommand -->
+	<bean id="randomMovieCommand" class="com.koreait.movie.command.recommand.RecommandRandomMovieCommand"></bean>
+	<bean id="situMovieCommand" class="com.koreait.movie.command.recommand.RecommandSituMovieCommand"></bean>
+	<bean id="categoryCommand" class="com.koreait.movie.command.recommand.RecommandCategoryCommand"></bean>
+	<bean id="genreCheckCommand" class="com.koreait.movie.command.recommand.RecommandGenreCheckCommand"></bean>
+	
+	<!-- main -->
+	<bean id="mainCommand" class="com.koreait.movie.command.main.MainCommand"></bean>
+	<bean id="searchResultCommand" class="com.koreait.movie.command.main.SearchResultCommand"></bean>
+	
+	<!-- movieInfo -->
+	<bean id="movieInfoViewCommand" class="com.koreait.movie.command.movieInfo.MovieInfoViewCommand"></bean>
+	<bean id="starSetCommand" class="com.koreait.movie.command.movieInfo.StarSetCommand"></bean>
+	<bean id="initStarScoreCommand" class="com.koreait.movie.command.movieInfo.InitStarScoreCommand"></bean>
+	<bean id="commentInsertCommand" class="com.koreait.movie.command.movieInfo.CommentInsertCommand"></bean>
+	<bean id="movieCommentViewListCommand" class="com.koreait.movie.command.movieInfo.MovieCommentViewListCommand"></bean>
+	<bean id="commentScrollEventCommand" class="com.koreait.movie.command.movieInfo.CommentScrollEventCommand"></bean>
+	<bean id="insertWishListCommand" class="com.koreait.movie.command.movieInfo.InsertWishListCommand"></bean>
+	<bean id="deleteWishListCommand" class="com.koreait.movie.command.movieInfo.DeleteWishListCommand"></bean>
+	<bean id="wishListCommand" class="com.koreait.movie.command.myPage.WishListCommand"></bean>
+	
+	<!-- admin -->
+	<bean id="userListCommand" class="com.koreait.movie.command.admin.UserListCommand"></bean>
+	<bean id="userDeleteCommand" class="com.koreait.movie.command.admin.UserDeleteCommand"></bean>
+	<bean id="movieListCommand" class="com.koreait.movie.command.admin.MovieListCommand"></bean>
+	<bean id="adminQnaListCommand" class="com.koreait.movie.command.admin.AdminQnaListCommand"></bean>
+	<bean id="adminQnaDeleteCommand" class="com.koreait.movie.command.admin.AdminQnaDeleteCommand"></bean>
+</beans>

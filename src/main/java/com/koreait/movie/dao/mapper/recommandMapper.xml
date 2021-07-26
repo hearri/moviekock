@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.koreait.movie.dao.RecommandDao">
+	
+	<select id="movieCount" resultType="int">
+		select count(*) 
+		 from movie
+	</select>
+	
+	
+	<select id="movieTitle" parameterType = "int" resultType="String">
+		select movie_title
+			from movie
+		where movie_no = #{no}
+	</select>
+	
+	<select id="movieList" parameterType="int" resultType="com.koreait.movie.dto.MovieDto">
+ 		select distinct a.movie_title
+ 			from movie a, genre b, movie_genre, movie_genre c
+ 		where b.genre_no = #{situNo}
+ 			and a.movie_no = c.movie_no
+	</select>
+	
+	<select id="movieListGenre" parameterType="int" resultType="com.koreait.movie.dto.MovieDto">
+         SELECT * FROM
+		(SELECT ROW_NUMBER() OVER(PARTITION BY M.MOVIE_NO ORDER BY M.MOVIE_TITLE DESC ) AS RNUM, M.*,GM.GENRE_NAME
+   			 FROM MOVIE M,(SELECT * 
+        			FROM MOVIE_GENRE A, GENRE B
+        				WHERE A.GENRE_NO = #{genre_no}) GM
+				WHERE M.MOVIE_NO = GM.MOVIE_NO) MOVIE WHERE RNUM =1
+	</select>
+	
+	<select id="movieListGenreAll" resultType="com.koreait.movie.dto.MovieDto">
+    SELECT * FROM
+		(SELECT ROW_NUMBER() OVER(PARTITION BY M.MOVIE_NO ORDER BY M.MOVIE_TITLE DESC ) AS RNUM, M.*,GM.GENRE_NAME
+   			 FROM MOVIE M,(SELECT * 
+        			FROM MOVIE_GENRE A, GENRE B
+        				WHERE A.GENRE_NO = B.GENRE_NO) GM
+	WHERE M.MOVIE_NO = GM.MOVIE_NO) MOVIE WHERE RNUM =1
+	</select>
+	
+</mapper>
+
